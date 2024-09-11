@@ -27,7 +27,7 @@
   },
   "require": {
     "php": "^8.0",
-    "bayfrontmedia/bones": "^4.2",
+    "bayfrontmedia/bones": "^5.1",
     "bayfrontmedia/route-it": "^3.1",
     "bayfrontmedia/veil": "^2.1"
   },
