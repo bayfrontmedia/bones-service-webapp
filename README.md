@@ -21,8 +21,8 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## Requirements
 
-* PHP >= 8.0
-* Bones >= 5.1
+* PHP >= 8.0 (Tested up to `8.4`)
+* Bones >= 5.3
 
 ## Installation
 
