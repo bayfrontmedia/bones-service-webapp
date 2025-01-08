@@ -28,6 +28,8 @@ The configuration rules are enforced by event subscriptions and automatically ad
 
 The web app `version` is added to the information returned by the `php bones about:bones` [console command](https://github.com/bayfrontmedia/bones/blob/master/docs/usage/console.md).
 
+The entire `webapp` configuration array is available within the Veil data array with key of `webapp`.
+
 ## Add to container
 
 With the configuration completed, the `WebAppService` class needs to be added to the Bones [service container](https://github.com/bayfrontmedia/bones/blob/master/docs/usage/container.md).
