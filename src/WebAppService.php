@@ -103,9 +103,11 @@ class WebAppService extends Service
 
             $body = $this->filters->doFilter('webapp.response.body', $this->veil->getView($veil_file, $this->filters->doFilter('webapp.response.data', $data)));
 
+            $this->response->setStatusCode($status_code)->setHeaders($headers)->setBody($body);
+
             $this->events->doEvent('webapp.response', $this->response);
 
-            $this->response->setStatusCode($status_code)->setHeaders($headers)->setBody($body)->send();
+            $this->response->send();
 
         } catch (FileNotFoundException|InvalidStatusCodeException $e) {
             throw new WebAppServiceException($e->getMessage(), $e->getCode(), $e);
