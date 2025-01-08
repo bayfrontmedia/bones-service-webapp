@@ -3,6 +3,7 @@
 - [Initial setup](setup.md)
 - [Events](events.md)
 - [Filters](filters.md)
+- [VeilData](veildata.md)
 - [WebAppService](webappservice-class.md)
 
 ## General usage
