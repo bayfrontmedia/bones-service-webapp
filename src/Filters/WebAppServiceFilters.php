@@ -5,6 +5,7 @@ namespace Bayfront\BonesService\WebApp\Filters;
 use Bayfront\Bones\Abstracts\FilterSubscriber;
 use Bayfront\Bones\Application\Services\Filters\FilterSubscription;
 use Bayfront\Bones\Interfaces\FilterSubscriberInterface;
+use Bayfront\BonesService\WebApp\Utilities\VeilData;
 use Bayfront\BonesService\WebApp\WebAppService;
 
 class WebAppServiceFilters extends FilterSubscriber implements FilterSubscriberInterface
@@ -25,7 +26,8 @@ class WebAppServiceFilters extends FilterSubscriber implements FilterSubscriberI
 
         return [
             new FilterSubscription('about.bones', [$this, 'addWebAppVersion'], 10),
-            new FilterSubscription('webapp.response.body', [$this, 'addTagRoute'], 10)
+            new FilterSubscription('webapp.response.body', [$this, 'addTagRoute'], 10),
+            new FilterSubscription('webapp.response.data', [$this, 'setVeilData'], 99)
         ];
 
     }
@@ -77,6 +79,18 @@ class WebAppServiceFilters extends FilterSubscriber implements FilterSubscriberI
 
         return $body;
 
+    }
+
+    /**
+     * Set Veil data.
+     *
+     * @param array $data
+     * @return array
+     */
+    public function setVeilData(array $data): array
+    {
+        VeilData::set($data);
+        return $data;
     }
 
 }
