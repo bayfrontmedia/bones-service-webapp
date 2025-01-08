@@ -89,6 +89,10 @@ class WebAppServiceFilters extends FilterSubscriber implements FilterSubscriberI
      */
     public function setVeilData(array $data): array
     {
+        $data = array_merge($data, [
+            'webapp' => $this->webAppService->config
+        ]);
+
         VeilData::set($data);
         return $data;
     }

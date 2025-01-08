@@ -24,7 +24,7 @@ class WebAppService extends Service
     public Response $response;
     public Router $router;
     public Veil $veil;
-    protected array $config;
+    public array $config;
 
     /**
      * The container will resolve any dependencies.

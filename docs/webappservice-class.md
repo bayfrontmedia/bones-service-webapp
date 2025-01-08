@@ -8,6 +8,10 @@ The `WebAppService` class contains the following Bones services:
 - [Router](https://github.com/bayfrontmedia/bones/blob/master/docs/services/router.md) as `$this->router`
 - [Veil](https://github.com/bayfrontmedia/bones/blob/master/docs/services/veil.md) as `$this->veil`
 
+Public properties include:
+
+- `$config` (array): Entire web app configuration array.
+
 Methods include:
 
 - [getConfig](#getconfig)
