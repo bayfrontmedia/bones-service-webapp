@@ -168,7 +168,7 @@ class WebAppServiceFilters extends FilterSubscriber implements FilterSubscriberI
     }
 
     /**
-     * Set web app data.
+     * Set web app data for use in Veil templates.
      *
      * - locale.valid
      * - locale.current

@@ -77,7 +77,7 @@ Add support for the `@say:` template tag which returns the translation of a give
 
 **Description:**
 
-Set web app data.
+Set web app data for use in Veil templates.
 
 - `locale.valid`
 - `locale.current`

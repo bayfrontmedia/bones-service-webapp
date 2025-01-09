@@ -44,7 +44,7 @@ class WebAppServiceEvents extends EventSubscriber implements EventSubscriberInte
     }
 
     /**
-     * Set locale based on URL locale query parameter or cookie, and redirect if needed.
+     * Set locale and redirect if needed.
      *
      * @return void
      * @throws InvalidStatusCodeException

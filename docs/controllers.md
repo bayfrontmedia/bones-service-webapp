@@ -1,7 +1,7 @@
 # Web app service: Controllers
 
 Any controller used by the web app service must extend `Bayfront\BonesService\WebApp\Abstracts\WebAppController`,
-which implements an `Bayfront\BonesService\WebApp\Interfaces\WebAppControllerInterface`.
+which implements a `Bayfront\BonesService\WebApp\Interfaces\WebAppControllerInterface`.
 
 The interface requires only one method, `isPrivate`, which returns a boolean value.
 its value determines which of the web app controller events are executed.

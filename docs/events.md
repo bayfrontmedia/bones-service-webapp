@@ -22,7 +22,7 @@ Event subscribers:
 
 **Description:**
 
-Set locale based on URL locale query parameter or cookie, and redirect if needed.
+Set locale and redirect if needed.
 
 This functionality is skipped when any of the following exist:
 
@@ -35,7 +35,7 @@ The locale is defined by the following, when the value exists in the `webapp.loc
 - A URL query parameter with the name defined in `webapp.locale.cookie.name`
 - The first segment of the URL request path
 
-Once the locale is determined, a cookie is set with a valid duration as set in the `webapp.locale.cookie.duration` config value.
+Once the locale is determined, a cookie is set with a duration as defined in the `webapp.locale.cookie.duration` config value.
 If the `webapp.locale.routes.redirect` config value is `true` and the locale does not exist as the first segment of the
 URL request path, the requested page will be redirected with a `302` HTTP status.
 
