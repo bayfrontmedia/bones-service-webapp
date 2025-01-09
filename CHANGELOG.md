@@ -13,6 +13,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Fixed` for any bug fixes.
 - `Security` in case of vulnerabilities
 
+## [1.3.0] - 2025.01.19
+
+### Added
+
+- Added `WebAppService` config array to Veil data array
+- Added locale functionality
+- Added `@route` and `@say` template tags
+
+### Changed
+
+- Moved `respond` method from `WebAppService` to `WebAppController`
+
 ## [1.2.0] - 2025.01.09
 
 ### Added
