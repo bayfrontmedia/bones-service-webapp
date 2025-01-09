@@ -2,6 +2,7 @@
 
 - [Dependencies](#dependencies)
 - [Configuration](#configuration)
+- [Route prefix filter](#route-prefix-filter)
 - [Add to container](#add-to-container)
 
 ## Dependencies
@@ -10,6 +11,13 @@ This service requires the following Bones services to exist in the container:
 
 - [Router](https://github.com/bayfrontmedia/bones/blob/master/docs/services/router.md)
 - [Veil](https://github.com/bayfrontmedia/bones/blob/master/docs/services/veil.md)
+
+In addition, this service also requires the following library to exist in the container:
+
+- [Translate](https://github.com/bayfrontmedia/translation)
+
+The default locale used in the `Translate` class constructor should be set 
+to the `webapp.locale.default` config value (see below).
 
 ## Configuration
 
@@ -24,21 +32,53 @@ Typically, this would be placed at `config/webapp.php`.
 /*
  * For more information, see:
  * https://github.com/bayfrontmedia/bones-service-webapp/blob/master/docs/setup.md#configuration
- *
- * NOTE:
- * This entire array is added to the Veil data array with key of "webapp"
  */
 
 return [
-    'version' => '1.0.0', // Web app version
+    'locale' => [ // Locale settings
+        'enabled' => true,
+        'valid' => [ // Valid locales for which translations exist
+            'en',
+            'es'
+        ],
+        'default' => 'en', // Default locale
+        'cookie' => [
+            'name' => 'locale', // Cookie name
+            'duration' => 43200 // Cookie duration (in minutes): 43200 = 30 days
+        ],
+        'routes' => [
+            'redirect' => true, // Add locale to routes?
+            'exclude' => [ // Excluded requests from locale processing
+                'hosts' => [], // Hosts
+                'paths' => [ // URL paths
+                    '/api'
+                ],
+                'param' => 'locale_exclude' // Route parameter
+            ]
+        ]
+    ],
+    'public' => [ // Added to Veil data array with key of "webapp"
+        'version' => '1.0.0', // Web app version
+    ]
 ];
 ```
 
 The configuration rules are enforced by event subscriptions and automatically added by the web app service.
 
-The web app `version` is added to the information returned by the `php bones about:bones` [console command](https://github.com/bayfrontmedia/bones/blob/master/docs/usage/console.md).
+The `public.version` is added to the information returned by the `php bones about:bones` [console command](https://github.com/bayfrontmedia/bones/blob/master/docs/usage/console.md).
 
-The entire `webapp` configuration array is available within the Veil data array with key of `webapp`.
+The entire `public` configuration array is available within the Veil data array with key of `webapp`.
+
+## Route prefix filter
+
+The web app service depends on a `router.route_prefix` filter to be applied to the route prefix in order to
+add the locale to routes.
+
+Example:
+
+```php
+$router->setRoutePrefix($this->filter->doFilter('router.route_prefix', App::getConfig('router.route_prefix')));
+```
 
 ## Add to container
 

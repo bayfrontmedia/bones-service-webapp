@@ -43,17 +43,17 @@ class WebAppServiceFilters extends FilterSubscriber implements FilterSubscriberI
     /**
      * Add web app version to the array returned by the php bones about:bones console command, if existing.
      *
-     * @param array $arr
+     * @param array $array
      * @return array
      */
 
-    public function addWebAppVersion(array $arr): array
+    public function addWebAppVersion(array $array): array
     {
         if (App::getConfig('webapp.public.version') === null) {
-            return $arr;
+            return $array;
         }
 
-        return array_merge($arr, [
+        return array_merge($array, [
             'Web app version' => App::getConfig('webapp.public.version')
         ]);
     }
@@ -168,7 +168,7 @@ class WebAppServiceFilters extends FilterSubscriber implements FilterSubscriberI
     }
 
     /**
-     * Add web app data.
+     * Set web app data.
      *
      * - locale.valid
      * - locale.current

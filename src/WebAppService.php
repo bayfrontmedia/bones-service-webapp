@@ -11,10 +11,8 @@ use Bayfront\BonesService\WebApp\Events\WebAppServiceEvents;
 use Bayfront\BonesService\WebApp\Exceptions\WebAppServiceException;
 use Bayfront\BonesService\WebApp\Filters\WebAppServiceFilters;
 use Bayfront\Container\NotFoundException;
-use Bayfront\HttpResponse\InvalidStatusCodeException;
 use Bayfront\HttpResponse\Response;
 use Bayfront\RouteIt\Router;
-use Bayfront\Veil\FileNotFoundException;
 use Bayfront\Veil\Veil;
 
 class WebAppService extends Service
@@ -70,39 +68,6 @@ class WebAppService extends Service
         }
 
         $this->events->doEvent('webapp.start', $this);
-
-    }
-
-    /**
-     * Send web app response.
-     *
-     * - Filters body using the webapp.response.body filter
-     * - Filters data using the webapp.response.data filter
-     * - Triggers the webapp.response event
-     *
-     * @param string $veil_file (Path to file from base path, excluding file extension)
-     * @param array $data (Data to pass to view)
-     * @param int $status_code (HTTP status code to send)
-     * @param array $headers (Key/value pairs of header values to send)
-     * @return void
-     * @throws WebAppServiceException
-     */
-    public function respond(string $veil_file, array $data = [], int $status_code = 200, array $headers = []): void
-    {
-
-        try {
-
-            $body = $this->filters->doFilter('webapp.response.body', $this->veil->getView($veil_file, $this->filters->doFilter('webapp.response.data', $data)));
-
-            $this->response->setStatusCode($status_code)->setHeaders($headers)->setBody($body);
-
-            $this->events->doEvent('webapp.response', $this->response);
-
-            $this->response->send();
-
-        } catch (FileNotFoundException|InvalidStatusCodeException $e) {
-            throw new WebAppServiceException($e->getMessage(), $e->getCode(), $e);
-        }
 
     }
 
