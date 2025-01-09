@@ -19,8 +19,18 @@ Typically, this would be placed at `config/webapp.php`.
 **Example:**
 
 ```php
+<?php
+
+/*
+ * For more information, see:
+ * https://github.com/bayfrontmedia/bones-service-webapp/blob/master/docs/setup.md#configuration
+ *
+ * NOTE:
+ * This entire array is added to the Veil data array with key of "webapp"
+ */
+
 return [
-    'version' => '1.0.0' // Web app version
+    'version' => '1.0.0', // Web app version
 ];
 ```
 
@@ -37,25 +47,6 @@ This is typically done in the `resources/bootstrap.php` file.
 You may also wish to create an alias.
 
 For more information, see [Bones bootstrap documentation](https://github.com/bayfrontmedia/bones/blob/master/docs/usage/bootstrap.md).
-
-To ensure it only gets instantiated when needed, the container can `set` the class:
-
-```php
-use Bayfront\Bones\Application\Utilities\App;
-
-$container->set('Bayfront\BonesService\WebApp\WebAppService', function (Container $container) {
-
-    return $container->make('Bayfront\BonesService\WebApp\WebAppService', [
-        'config' => (array)App::getConfig('webapp', [])
-    ]);
-
-});
-
-$container->setAlias('webAppService', 'Bayfront\BonesService\WebApp\WebAppService');
-```
-
-However, by allowing the container to `make` the class during bootstrapping,
-the web app service is available to be used in console commands:
 
 ```php
 $webAppService = $container->make('Bayfront\BonesService\WebApp\WebAppService', [
