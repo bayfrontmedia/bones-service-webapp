@@ -31,31 +31,12 @@ class WebAppServiceFilters extends FilterSubscriber implements FilterSubscriberI
     {
 
         return [
-            new FilterSubscription('about.bones', [$this, 'addWebAppVersion'], 10),
             new FilterSubscription('router.route_prefix', [$this, 'addLocaleToRoutes'], 10),
             new FilterSubscription('webapp.response.body', [$this, 'addTagRoute'], 10),
             new FilterSubscription('webapp.response.body', [$this, 'addTagSay'], 10),
             new FilterSubscription('webapp.response.data', [$this, 'setWebAppData'], 99)
         ];
 
-    }
-
-    /**
-     * Add web app version to the array returned by the php bones about:bones console command, if existing.
-     *
-     * @param array $array
-     * @return array
-     */
-
-    public function addWebAppVersion(array $array): array
-    {
-        if (App::getConfig('webapp.public.version') === null) {
-            return $array;
-        }
-
-        return array_merge($array, [
-            'Web app version' => App::getConfig('webapp.public.version')
-        ]);
     }
 
     /**
@@ -170,8 +151,9 @@ class WebAppServiceFilters extends FilterSubscriber implements FilterSubscriberI
     /**
      * Set web app data for use in Veil templates.
      *
-     * - locale.valid
+     * - app.version (As defined at app.version config array, if existing)
      * - locale.current
+     * - locale.valid
      * - webapp (webapp.public config array)
      *
      * @param array $data
@@ -181,11 +163,13 @@ class WebAppServiceFilters extends FilterSubscriber implements FilterSubscriberI
     {
         $data = array_merge($data, [
             'locale' => [
-                'valid' => App::getConfig('webapp.locale.valid', []),
-                'current' => $this->translate->getLocale()
+                'current' => $this->translate->getLocale(),
+                'valid' => App::getConfig('webapp.locale.valid', [])
             ],
             'webapp' => App::getConfig('webapp.public', [])
         ]);
+
+        $data['app']['version'] = App::getConfig('app.version');
 
         VeilData::set($data);
         return $data;

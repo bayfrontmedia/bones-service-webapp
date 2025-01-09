@@ -58,12 +58,9 @@ return [
         ]
     ],
     'public' => [ // Added to Veil data array with key of "webapp"
-        'version' => '1.0.0', // Web app version
     ]
 ];
 ```
-
-The `public.version` is added to the information returned by the `php bones about:bones` [console command](https://github.com/bayfrontmedia/bones/blob/master/docs/usage/console.md).
 
 The entire `public` configuration array is available within the Veil data array with key of `webapp`.
 This is helpful for any data which should automatically be available from within Veil views, such as brand information,

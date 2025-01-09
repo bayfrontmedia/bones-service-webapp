@@ -11,25 +11,10 @@ service:
 
 | Subscription (method)                   | Filter                 | Priority |
 |-----------------------------------------|------------------------|----------|
-| [addWebAppVersion](#addwebappversion)   | `about.bones`          | 10       |
 | [addLocaleToRoutes](#addlocaletoroutes) | `router.route_prefix`  | 10       |
 | [addTagRoute](#addtagroute)             | `webapp.response.body` | 10       |
 | [addTagSay](#addtagsay)                 | `webapp.response.body` | 10       |
 | [setWebAppData](#setwebappdata)         | `webapp.response.data` | 99       |
-
-## addWebAppVersion
-
-**Description:**
-
-Add web app version to the array returned by the `php bones about:bones` console command, if existing.
-
-**Parameters:**
-
-- `$array` (array)
-
-**Returns:**
-
-- (array)
 
 ## addLocaleToRoutes
 
@@ -79,8 +64,9 @@ Add support for the `@say:` template tag which returns the translation of a give
 
 Set web app data for use in Veil templates.
 
-- `locale.valid`
+- `app.version`: As defined at `app.version` config array, if existing
 - `locale.current`
+- `locale.valid`
 - `webapp`: `webapp.public` config array
 
 **Parameters:**
