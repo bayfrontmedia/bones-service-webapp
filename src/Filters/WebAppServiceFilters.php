@@ -184,7 +184,7 @@ class WebAppServiceFilters extends FilterSubscriber implements FilterSubscriberI
                 'valid' => App::getConfig('webapp.locale.valid', []),
                 'current' => $this->translate->getLocale()
             ],
-            'webapp' => App::getConfig('app.webapp.public', [])
+            'webapp' => App::getConfig('webapp.public', [])
         ]);
 
         VeilData::set($data);

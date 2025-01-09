@@ -155,7 +155,6 @@ class WebAppServiceEvents extends EventSubscriber implements EventSubscriberInte
     {
 
         $prefix = App::getConfig('router.route_prefix', '/');
-        //$prefix = $this->router->getRoutePrefix();
 
         if ($prefix == '' || $prefix == '/') {
             return trim($path, '/');
@@ -211,7 +210,6 @@ class WebAppServiceEvents extends EventSubscriber implements EventSubscriberInte
                 $segments[0] = $locale;
 
                 $redirect_path = trim(App::getConfig('router.route_prefix'), '/') . '/' . trim(implode('/', $segments), '/');
-                //$redirect_path = trim($this->router->getRoutePrefix(), '/') . '/' . trim(implode('/', $segments), '/');
 
                 $this->redirectTo($request_arr, $redirect_path);
 
@@ -222,7 +220,6 @@ class WebAppServiceEvents extends EventSubscriber implements EventSubscriberInte
         } else {
 
             $redirect_path = trim(App::getConfig('router.route_prefix'), '/') . '/' . $locale . '/' . $prefix_diff;
-            //$redirect_path = trim($this->router->getRoutePrefix(), '/') . '/' . $locale . '/' . $prefix_diff;
 
             $this->redirectTo($request_arr, $redirect_path);
 
