@@ -179,7 +179,15 @@ class WebAppServiceEvents extends EventSubscriber implements EventSubscriberInte
 
         if (!empty($request_arr['query'])) {
             unset($request_arr['query']['locale']);
-            $redirect_to .= '?' . http_build_query($request_arr['query']);
+
+            $query = http_build_query($request_arr['query']);
+
+            if ($query == '') {
+                $redirect_to .= '';
+            } else {
+                $redirect_to .= '?' . http_build_query($request_arr['query']);
+            }
+
         }
 
         $this->response->redirect($redirect_to);
