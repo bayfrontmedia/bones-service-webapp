@@ -5,14 +5,13 @@ namespace Bayfront\BonesService\WebApp;
 use Bayfront\Bones\Abstracts\Service;
 use Bayfront\Bones\Application\Services\Events\EventService;
 use Bayfront\Bones\Application\Services\Filters\FilterService;
-use Bayfront\Bones\Application\Utilities\App;
 use Bayfront\Bones\Exceptions\ServiceException;
 use Bayfront\BonesService\WebApp\Events\WebAppServiceEvents;
 use Bayfront\BonesService\WebApp\Exceptions\WebAppServiceException;
 use Bayfront\BonesService\WebApp\Filters\WebAppServiceFilters;
-use Bayfront\Container\NotFoundException;
 use Bayfront\HttpResponse\Response;
 use Bayfront\RouteIt\Router;
+use Bayfront\Translation\Translate;
 use Bayfront\Veil\Veil;
 
 class WebAppService extends Service
@@ -22,6 +21,7 @@ class WebAppService extends Service
     public FilterService $filters;
     public Response $response;
     public Router $router;
+    public Translate $translate;
     public Veil $veil;
 
     /**
@@ -32,30 +32,27 @@ class WebAppService extends Service
      * @param FilterService $filters
      * @param Response $response
      * @param Router $router
+     * @param Translate $translate
      * @param Veil $veil
      * @throws WebAppServiceException
      */
 
-    public function __construct(EventService $events, FilterService $filters, Response $response, Router $router, Veil $veil)
+    public function __construct(EventService $events, FilterService $filters, Response $response, Router $router, Translate $translate, Veil $veil)
     {
         $this->events = $events;
         $this->filters = $filters;
         $this->response = $response;
         $this->router = $router;
+        $this->translate = $translate;
         $this->veil = $veil;
 
         parent::__construct($events);
 
-        if (!App::has('Bayfront\Translation\Translate')) {
-            throw new WebAppServiceException('Unable to start WebAppService: Required dependency not found (Bayfront\Translation\Translate)');
-        }
-
         // Enqueue events
 
         try {
-            $translate = App::get('Bayfront\Translation\Translate');
             $this->events->addSubscriptions(new WebAppServiceEvents($this, $translate));
-        } catch (ServiceException|NotFoundException $e) {
+        } catch (ServiceException $e) {
             throw new WebAppServiceException('Unable to start WebAppService: ' . $e->getMessage(), $e->getCode(), $e->getPrevious());
         }
 

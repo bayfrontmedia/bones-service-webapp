@@ -14,7 +14,7 @@ This service requires the following Bones services to exist in the container:
 
 In addition, this service also requires the following library to exist in the container:
 
-- [Translate](https://github.com/bayfrontmedia/translation)
+- [Translation](https://github.com/bayfrontmedia/translation)
 
 The default locale used in the `Translate` class constructor should be set 
 to the `webapp.locale.default` config value (see below).

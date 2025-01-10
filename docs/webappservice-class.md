@@ -6,4 +6,5 @@ The `WebAppService` class contains the following Bones services:
 - [FilterService](https://github.com/bayfrontmedia/bones/blob/master/docs/services/filters.md) as `$this->filters`
 - [Response](https://github.com/bayfrontmedia/bones/blob/master/docs/services/response.md) as `$this->response`
 - [Router](https://github.com/bayfrontmedia/bones/blob/master/docs/services/router.md) as `$this->router`
+- [Translation](https://github.com/bayfrontmedia/translation) as `$this->translate`
 - [Veil](https://github.com/bayfrontmedia/bones/blob/master/docs/services/veil.md) as `$this->veil`
