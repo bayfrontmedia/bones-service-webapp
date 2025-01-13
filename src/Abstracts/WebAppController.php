@@ -37,7 +37,7 @@ abstract class WebAppController extends Controller implements WebAppControllerIn
      *
      * @return array
      */
-    private function getJsonBody(): array
+    public function getJsonBody(): array
     {
 
         $body = json_decode(Request::getBody(), true);
