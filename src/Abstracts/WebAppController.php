@@ -6,6 +6,7 @@ use Bayfront\Bones\Abstracts\Controller;
 use Bayfront\BonesService\WebApp\Exceptions\WebAppServiceException;
 use Bayfront\BonesService\WebApp\Interfaces\WebAppControllerInterface;
 use Bayfront\BonesService\WebApp\WebAppService;
+use Bayfront\HttpRequest\Request;
 use Bayfront\HttpResponse\InvalidStatusCodeException;
 use Bayfront\Veil\FileNotFoundException;
 
@@ -28,6 +29,24 @@ abstract class WebAppController extends Controller implements WebAppControllerIn
         } else {
             $this->webAppService->events->doEvent('webapp.controller.public', $this);
         }
+
+    }
+
+    /**
+     * Get JSON body from request as array, or return empty array if not existing.
+     *
+     * @return array
+     */
+    private function getJsonBody(): array
+    {
+
+        $body = json_decode(Request::getBody(), true);
+
+        if (!$body || !is_array($body)) {
+            return [];
+        }
+
+        return $body;
 
     }
 
