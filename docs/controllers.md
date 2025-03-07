@@ -10,7 +10,22 @@ The [WebAppService class](webappservice-class.md) is available within the contro
 
 Methods:
 
+- [getJsonBody](#getjsonbody)
 - [respond](#respond)
+
+## getJsonBody
+
+**Description:**
+
+Get JSON body from request as array, or return empty array if not existing.
+
+**Parameters:**
+
+- (none)
+
+**Returns:**
+
+- (array)
 
 ## respond
 

@@ -151,10 +151,9 @@ class WebAppServiceFilters extends FilterSubscriber implements FilterSubscriberI
     /**
      * Set web app data for use in Veil templates.
      *
-     * - app.version (As defined at app.version config array, if existing)
-     * - locale.current
-     * - locale.valid
-     * - webapp (webapp.public config array)
+     * - webapp.locale.current
+     * - webapp.locale.valid
+     * - webapp.public (webapp.public config array)
      *
      * @param array $data
      * @return array
@@ -162,14 +161,14 @@ class WebAppServiceFilters extends FilterSubscriber implements FilterSubscriberI
     public function setWebAppData(array $data): array
     {
         $data = array_merge($data, [
-            'locale' => [
-                'current' => $this->translate->getLocale(),
-                'valid' => App::getConfig('webapp.locale.valid', [])
-            ],
-            'webapp' => App::getConfig('webapp.public', [])
+            'webapp' => [
+                'locale' => [
+                    'current' => $this->translate->getLocale(),
+                    'valid' => App::getConfig('webapp.locale.valid', [])
+                ],
+                'public' => App::getConfig('webapp.public', [])
+            ]
         ]);
-
-        $data['app']['version'] = App::getConfig('app.version');
 
         VeilData::set($data);
         return $data;

@@ -64,10 +64,9 @@ Add support for the `@say:` template tag which returns the translation of a give
 
 Set web app data for use in Veil templates.
 
-- `app.version`: As defined at `app.version` config array, if existing
-- `locale.current`
-- `locale.valid`
-- `webapp`: `webapp.public` config array
+- `webapp.locale.current`
+- `webapp.locale.valid`
+- `webapp.public`: `webapp.public` config array
 
 **Parameters:**
 
