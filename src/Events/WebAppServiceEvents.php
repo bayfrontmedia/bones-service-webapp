@@ -175,7 +175,7 @@ class WebAppServiceEvents extends EventSubscriber implements EventSubscriberInte
     #[NoReturn] private function redirectTo(array $request_arr, string $redirect_path): void
     {
 
-        $redirect_to = $request_arr['protocol'] . str_replace('//', '/', $request_arr['host'] . '/' . $redirect_path);
+        $redirect_to = $request_arr['protocol'] . str_replace('//', '/', $request_arr['host'] . '/' . rtrim($redirect_path, '/'));
 
         if (!empty($request_arr['query'])) {
             unset($request_arr['query']['locale']);

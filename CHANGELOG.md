@@ -13,6 +13,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Fixed` for any bug fixes.
 - `Security` in case of vulnerabilities
 
+## [1.5.1] - Upcoming
+
+### Changed
+
+- Updated `redirectTo` method to trim trailing slashes which reduces number of potential redirects
+
 ## [1.5.0] - 2025.03.07
 
 ### Added
