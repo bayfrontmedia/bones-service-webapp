@@ -57,7 +57,7 @@ class VeilData
     public const ACTION_CREATE = 'create';
     public const ACTION_READ = 'read';
     public const ACTION_LIST = 'list';
-    public const ACTION_UPDATE = 'update';
+    public const ACTION_EDIT = 'edit';
     public const ACTION_DELETE = 'delete';
 
 }

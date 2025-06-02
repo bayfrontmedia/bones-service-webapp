@@ -10,7 +10,7 @@ The following constants are included, which can be helpful to pass to the view:
 - `ACTION_CREATE`
 - `ACTION_READ`
 - `ACTION_LIST`
-- `ACTION_UPDATE`
+- `ACTION_EDIT`
 - `ACTION_DELETE`
 
 All methods are static.
