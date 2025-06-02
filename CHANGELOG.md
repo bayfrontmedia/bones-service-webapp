@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.5.1] - Upcoming
 
+### Added
+
+- Added `ACTION_*` constants in `VeilData`
+
 ### Changed
 
 - Updated `redirectTo` method to trim trailing slashes which reduces number of potential redirects
