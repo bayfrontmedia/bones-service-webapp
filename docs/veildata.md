@@ -19,6 +19,7 @@ All methods are static.
 - [getData](#getdata)
 - [get](#get)
 - [has](#has)
+- [sanitize](#sanitize)
 
 ## set
 
@@ -42,7 +43,7 @@ Get entire data array.
 
 **Parameters:**
 
-- (None)
+- `$sanitize = true` (bool)
 
 **Returns:**
 
@@ -59,6 +60,7 @@ returning an optional default value if not found.
 
 - `$key` (string): Key to return in "dot" notation
 - `$default = null` (mixed): Default value to return
+- `$sanitize = true` (bool)
 
 **Returns:**
 
@@ -77,3 +79,17 @@ Checks if data key exists and not null using "dot" notation.
 **Returns:**
 
 - (bool)
+
+## sanitize
+
+**Description:**
+
+Sanitize strings and arrays for output to a Veil template.
+
+**Parameters:**
+
+- `$data` (mixed)
+
+**Returns:**
+
+- (mixed)
