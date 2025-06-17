@@ -26,7 +26,11 @@ class VeilData
             $return = [];
 
             foreach ($dot as $key => $value) {
-                $return[str_replace('$', '&#36;', $key)] = str_replace('$', '&#36;', $value);
+                if (is_string($value)) {
+                    $return[str_replace('$', '&#36;', $key)] = str_replace('$', '&#36;', $value);
+                } else {
+                    $return[str_replace('$', '&#36;', $key)] = $value;
+                }
             }
 
             return Arr::undot($return);
