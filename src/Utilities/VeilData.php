@@ -3,7 +3,6 @@
 namespace Bayfront\BonesService\WebApp\Utilities;
 
 use Bayfront\ArrayHelpers\Arr;
-use Bayfront\Sanitize\Sanitize;
 
 class VeilData
 {
@@ -16,10 +15,9 @@ class VeilData
      */
     public static function sanitize(mixed $data): mixed
     {
-        $data = Sanitize::escape($data);
 
         if (is_string($data)) {
-            $data = str_replace('$', '&#36;', $data);
+            $data = str_replace('$', '&#36;', htmlentities($data, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'));
         } else if (is_array($data)) {
 
             $dot = Arr::dot($data);
@@ -27,9 +25,9 @@ class VeilData
 
             foreach ($dot as $key => $value) {
                 if (is_string($value)) {
-                    $return[str_replace('$', '&#36;', $key)] = str_replace('$', '&#36;', $value);
+                    $return[str_replace('$', '&#36;', htmlentities($key, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'))] = str_replace('$', '&#36;', htmlentities($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'));
                 } else {
-                    $return[str_replace('$', '&#36;', $key)] = $value;
+                    $return[str_replace('$', '&#36;', htmlentities($key, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'))] = $value;
                 }
             }
 
