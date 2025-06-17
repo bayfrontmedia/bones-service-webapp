@@ -3,9 +3,39 @@
 namespace Bayfront\BonesService\WebApp\Utilities;
 
 use Bayfront\ArrayHelpers\Arr;
+use Bayfront\Sanitize\Sanitize;
 
 class VeilData
 {
+
+    /**
+     * Sanitize data if string or array.
+     *
+     * @param mixed $data
+     * @return mixed
+     */
+    public static function sanitize(mixed $data): mixed
+    {
+        $data = Sanitize::escape($data);
+
+        if (is_string($data)) {
+            $data = str_replace('$', '&#36;', $data);
+        } else if (is_array($data)) {
+
+            $dot = Arr::dot($data);
+            $return = [];
+
+            foreach ($dot as $key => $value) {
+                $return[str_replace('$', '&#36;', $key)] = str_replace('$', '&#36;', $value);
+            }
+
+            return Arr::undot($return);
+
+        }
+
+        return $data;
+
+    }
 
     private static array $data = [];
 
@@ -23,10 +53,15 @@ class VeilData
     /**
      * Get entire data array.
      *
+     * @param bool $sanitize
      * @return array
      */
-    public static function getData(): array
+    public static function getData(bool $sanitize = true): array
     {
+        if ($sanitize === true) {
+            return self::sanitize(self::$data);
+        }
+
         return self::$data;
     }
 
@@ -36,10 +71,14 @@ class VeilData
      *
      * @param string $key (Key to return in "dot" notation)
      * @param mixed|null $default (Default value to return)
+     * @param bool $sanitize
      * @return mixed
      */
-    public static function get(string $key, mixed $default = null): mixed
+    public static function get(string $key, mixed $default = null, bool $sanitize = true): mixed
     {
+        if ($sanitize === true) {
+            return self::sanitize(Arr::get(self::$data, $key, $default));
+        }
         return Arr::get(self::$data, $key, $default);
     }
 

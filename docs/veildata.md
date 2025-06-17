@@ -15,10 +15,25 @@ The following constants are included, which can be helpful to pass to the view:
 
 All methods are static.
 
+- [sanitize](#sanitize)
 - [set](#set)
 - [getData](#getdata)
 - [get](#get)
 - [has](#has)
+
+## sanitize
+
+**Description:**
+
+Sanitize data if string or array.
+
+**Parameters:**
+
+- `$data` (mixed)
+
+**Returns:**
+
+- (mixed)
 
 ## set
 
@@ -42,7 +57,7 @@ Get entire data array.
 
 **Parameters:**
 
-- (none)
+- `$sanitize = true` (bool)
 
 **Returns:**
 
@@ -59,6 +74,7 @@ returning an optional default value if not found.
 
 - `$key` (string): Key to return in "dot" notation
 - `$default = null` (mixed): Default value to return
+- `$sanitize = true` (bool)
 
 **Returns:**
 
