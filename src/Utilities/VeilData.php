@@ -7,38 +7,6 @@ use Bayfront\ArrayHelpers\Arr;
 class VeilData
 {
 
-    /**
-     * Sanitize data if string or array.
-     *
-     * @param mixed $data
-     * @return mixed
-     */
-    public static function sanitize(mixed $data): mixed
-    {
-
-        if (is_string($data)) {
-            $data = str_replace('$', '&#36;', htmlentities($data, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'));
-        } else if (is_array($data)) {
-
-            $dot = Arr::dot($data);
-            $return = [];
-
-            foreach ($dot as $key => $value) {
-                if (is_string($value)) {
-                    $return[str_replace('$', '&#36;', htmlentities($key, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'))] = str_replace('$', '&#36;', htmlentities($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'));
-                } else {
-                    $return[str_replace('$', '&#36;', htmlentities($key, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'))] = $value;
-                }
-            }
-
-            return Arr::undot($return);
-
-        }
-
-        return $data;
-
-    }
-
     private static array $data = [];
 
     /**
@@ -55,15 +23,10 @@ class VeilData
     /**
      * Get entire data array.
      *
-     * @param bool $sanitize
      * @return array
      */
-    public static function getData(bool $sanitize = true): array
+    public static function getData(): array
     {
-        if ($sanitize === true) {
-            return self::sanitize(self::$data);
-        }
-
         return self::$data;
     }
 
@@ -73,14 +36,10 @@ class VeilData
      *
      * @param string $key (Key to return in "dot" notation)
      * @param mixed|null $default (Default value to return)
-     * @param bool $sanitize
      * @return mixed
      */
-    public static function get(string $key, mixed $default = null, bool $sanitize = true): mixed
+    public static function get(string $key, mixed $default = null): mixed
     {
-        if ($sanitize === true) {
-            return self::sanitize(Arr::get(self::$data, $key, $default));
-        }
         return Arr::get(self::$data, $key, $default);
     }
 
