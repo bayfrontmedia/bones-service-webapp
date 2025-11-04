@@ -5,12 +5,21 @@ Using this utility class eliminates the need to check if a `$data` property exis
 
 The Web app service automatically sets the entire `$data` array using the `webapp.response.data` [filter](filters.md).
 
+The following constants are included, which can be helpful to pass to the view:
+
+- `ACTION_CREATE`
+- `ACTION_READ`
+- `ACTION_LIST`
+- `ACTION_EDIT`
+- `ACTION_DELETE`
+
 All methods are static.
 
 - [set](#set)
 - [getData](#getdata)
 - [get](#get)
 - [has](#has)
+- [sanitize](#sanitize)
 
 ## set
 
@@ -34,7 +43,7 @@ Get entire data array.
 
 **Parameters:**
 
-- (none)
+- `$sanitize = true` (bool)
 
 **Returns:**
 
@@ -51,6 +60,7 @@ returning an optional default value if not found.
 
 - `$key` (string): Key to return in "dot" notation
 - `$default = null` (mixed): Default value to return
+- `$sanitize = true` (bool)
 
 **Returns:**
 
@@ -69,3 +79,17 @@ Checks if data key exists and not null using "dot" notation.
 **Returns:**
 
 - (bool)
+
+## sanitize
+
+**Description:**
+
+Sanitize strings and arrays for output to a Veil template.
+
+**Parameters:**
+
+- `$data` (mixed)
+
+**Returns:**
+
+- (mixed)
